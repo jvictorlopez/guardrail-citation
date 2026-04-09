@@ -61,5 +61,33 @@ A lightweight Citation Guardrail Engine — an HTTP service that decides whether
 - sentence-transformers/all-MiniLM-L6-v2 (local, 87 MB)
 - httpx (for optional OpenAI provider)
 
+## Frontend (Demo UI)
+
+An optional Vite + React + TypeScript console for demoing the guardrail engine interactively.
+
+### Features
+- **Payload Playground** — JSON editor with syntax validation
+- **Demo Cases** — 6 one-click test cases covering all decision statuses
+- **Response Viewer** — final answer, citation decision, metrics display
+- **Health Panel** — live counters with refresh
+- **Status Badges** — color-coded decision statuses
+
+### How to Run
+```bash
+# Terminal 1: backend
+uvicorn app.main:app --reload
+
+# Terminal 2: frontend
+cd frontend && npm install && npm run dev
+```
+
+Open http://localhost:5173
+
+### Validated
+- CORS preflight returns correct headers
+- Frontend fetches /health on load
+- Demo cases submit to /guardrail and display results
+- Backend eval still passes 11/11 with frontend CORS middleware
+
 ## Remaining
 - Video walkthrough (to be recorded separately)
