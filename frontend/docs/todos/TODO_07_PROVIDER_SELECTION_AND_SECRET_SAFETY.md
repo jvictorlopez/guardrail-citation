@@ -54,5 +54,5 @@ Provider flexibility lets the demo showcase both local (free, fast) and cloud (O
 `feat: add provider selection and secret safety updates`
 
 ## Final Status
-- **Status**: Not started
-- **Completion Notes**: —
+- **Status**: Done
+- **Completion Notes**: Per-request provider override wired. .env gitignored (confirmed). .env.example created with safe placeholders. OpenAI without key falls back to keyword with clear reason. No secrets in committed files.

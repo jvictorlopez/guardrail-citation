@@ -63,5 +63,5 @@ Hybrid search fuses the strengths of semantic understanding (contextual meaning)
 `feat: add backend hybrid strategy with bm25 fusion`
 
 ## Final Status
-- **Status**: Not started
-- **Completion Notes**: —
+- **Status**: Done
+- **Completion Notes**: BM25 in-process implementation with min-max normalization. Hybrid strategy fuses semantic + BM25 via alpha. Per-request overrides for strategy/provider/alpha. ScoreBreakdown and model_calls in response. Eval 11/11 at 100%.

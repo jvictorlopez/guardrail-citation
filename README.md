@@ -76,12 +76,44 @@ If the OpenAI call fails (missing key, timeout, etc.), the engine **automaticall
 
 ## Matching Strategy
 
-The matching strategy is configurable via environment variable:
+The matching strategy is configurable via environment variable or per-request override:
 
 ```bash
-export MATCH_STRATEGY=semantic   # default — uses embeddings
-export MATCH_STRATEGY=keyword    # lexical token overlap, no LLM calls
+export MATCH_STRATEGY=semantic   # default — embedding cosine similarity
+export MATCH_STRATEGY=hybrid     # semantic + BM25 lexical fusion
+export MATCH_STRATEGY=keyword    # lexical token overlap, no model calls
 ```
+
+### Hybrid Search
+
+Hybrid search fuses semantic embedding similarity with BM25 lexical scoring:
+
+```
+hybrid_score = α × semantic_score + (1 − α) × bm25_score
+```
+
+- **α = 1.0** → 100% semantic, 0% BM25
+- **α = 0.7** → 70% semantic, 30% BM25 (default)
+- **α = 0.0** → 0% semantic, 100% BM25
+
+BM25 scores are min-max normalized to [0, 1] before fusion so they're comparable with cosine similarity scores.
+
+### Per-Request Overrides
+
+The frontend can override strategy, provider, and alpha per request:
+
+```json
+{
+  "strategy": "hybrid",
+  "provider": "hf",
+  "alpha": 0.7,
+  "query": "...",
+  "llm_answer": "...",
+  ...
+}
+```
+
+Config precedence: request override > environment variable > hardcoded default.
 
 ## HuggingFace Model
 
@@ -235,12 +267,14 @@ Open `http://localhost:3000`. The frontend connects to the backend at `http://lo
 
 - **Demo Cases Panel** — 6 pre-built cases grouped by behavior (Inject, Detect Existing, Skip Rules, Edge Cases)
 - **Monaco Editor** — syntax highlighting, JSON validation, format/reset controls
-- **Response Panel** — final answer card, citation decision with status-specific glows, metrics tiles
+- **Search Controls** — strategy selector (semantic/hybrid), provider selector (hf/openai), alpha slider with live percentage readout
+- **Response Panel** — final answer card, citation decision with status-specific glows, score breakdown for hybrid, metrics tiles
 - **Health Counters** — live counters from /health with manual refresh
 - **Animations** — Framer Motion staggered reveals, AnimatePresence transitions
 - **Keyboard shortcut** — Cmd+Enter to run guardrail
 - **Connectivity indicator** — real-time backend connection status
 - **Toast notifications** — success/error feedback via Sonner
+- **Model Calls metric** — accurate count of embedding provider invocations (not "LLM calls")
 
 ## Video Walkthrough
 

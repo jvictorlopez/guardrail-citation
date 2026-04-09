@@ -55,5 +55,5 @@ The current "LLM Calls" label implies text-generation/chat completion calls, but
 `fix: correct model call metrics and observability labels`
 
 ## Final Status
-- **Status**: Not started
-- **Completion Notes**: —
+- **Status**: Done
+- **Completion Notes**: "LLM Calls" renamed to "Model Calls" in frontend. model_calls field added to backend Metrics (llm_calls preserved for backward compat). Shortcut cases show 0, semantic/hybrid show 1. Provider and strategy displayed in response. Eval still passes 11/11.

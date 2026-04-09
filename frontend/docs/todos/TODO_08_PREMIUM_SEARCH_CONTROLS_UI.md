@@ -64,5 +64,5 @@ These controls make the demo interactive and educational. The viewer can see how
 `feat: add premium frontend search controls and score breakdown`
 
 ## Final Status
-- **Status**: Not started
-- **Completion Notes**: —
+- **Status**: Done
+- **Completion Notes**: SearchControls component with strategy/provider segment buttons and alpha slider. Live percentage readout, helper copy, disabled state for semantic. Overrides sent in API requests. Score breakdown displayed in response panel for hybrid results.
