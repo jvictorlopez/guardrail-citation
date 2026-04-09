@@ -1,0 +1,308 @@
+/* ── Header ── */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+}
+
+.header-left {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.app-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.app-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.header-badge {
+  font-size: 0.7rem;
+  font-family: "SF Mono", "Fira Code", monospace;
+  color: var(--text-muted);
+  background: var(--bg-input);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+/* ── Layout ── */
+.app-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px 28px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: calc(100vh - 60px);
+}
+
+.col-left,
+.col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Panel ── */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+.panel-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+
+/* ── Demo Cases ── */
+.demo-case-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--bg-input);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.demo-case-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+}
+
+.demo-case-btn.active {
+  border-color: var(--accent);
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.demo-case-label {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* ── Code Editor ── */
+.code-editor {
+  width: 100%;
+  min-height: 300px;
+  flex: 1;
+  padding: 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.code-editor:focus {
+  border-color: var(--border-focus);
+}
+
+/* ── Submit Button ── */
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  min-width: 150px;
+  justify-content: center;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Spinner ── */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Response Panel ── */
+.empty-state {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  padding: 32px 0;
+  text-align: center;
+}
+
+.response-section {
+  margin-bottom: 18px;
+}
+
+.response-section:last-child {
+  margin-bottom: 0;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.final-answer {
+  padding: 14px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  border-left: 3px solid var(--accent);
+}
+
+/* ── Decision Grid ── */
+.decision-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.decision-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.decision-key {
+  flex-shrink: 0;
+  width: 105px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.decision-value {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.decision-value.mono {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 0.82rem;
+}
+
+.reason-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Metrics ── */
+.metric-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 20px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  min-width: 90px;
+}
+
+.metric-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: "SF Mono", "Fira Code", monospace;
+  color: var(--accent);
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ── Health Panel ── */
+.refresh-btn {
+  padding: 5px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.refresh-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.counters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.counter-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+}
+
+.counter-value {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}

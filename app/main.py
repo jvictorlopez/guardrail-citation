@@ -1,6 +1,7 @@
 """FastAPI application — Citation Guardrail Engine."""
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.engine import run_guardrail
 from app.models import GuardrailRequest, GuardrailResponse
@@ -10,6 +11,14 @@ app = FastAPI(
     title="Citation Guardrail Engine",
     description="RAG post-processing guardrail that decides whether to inject a canonical citation into an LLM answer.",
     version="1.0.0",
+)
+
+# CORS for local frontend development
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
 

@@ -10,3 +10,7 @@ build/
 .ruff_cache/
 models/
 test_model.py
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
