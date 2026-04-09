@@ -88,5 +88,5 @@ The golden set demonstrates edge-case thinking — a core evaluation criterion. 
 `feat: add golden set, eval script, README, and NOTES`
 
 ## Final Status
-- **Status:** Not started
-- **Completion Notes:** —
+- **Status:** Done
+- **Completion Notes:** 11 golden set cases (5 seed + 6 edge). eval.py passes 11/11. README and NOTES complete with all required sections.

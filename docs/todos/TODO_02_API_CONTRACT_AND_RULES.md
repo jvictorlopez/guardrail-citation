@@ -101,5 +101,5 @@ class GuardrailResponse(BaseModel):
 `feat: scaffold FastAPI contract, health endpoint, and core rules`
 
 ## Final Status
-- **Status:** Not started
-- **Completion Notes:** —
+- **Status:** Done
+- **Completion Notes:** All models, endpoints, and deterministic rules implemented and tested. Health counters working.

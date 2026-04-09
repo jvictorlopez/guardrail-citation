@@ -104,5 +104,5 @@ except Exception as e:
 `feat: add matching strategies, HF provider, and fallback behavior`
 
 ## Final Status
-- **Status:** Not started
-- **Completion Notes:** —
+- **Status:** Done
+- **Completion Notes:** Keyword and semantic strategies implemented. HF provider uses local model directory. OpenAI provider available behind env var. Fallback from semantic to keyword on failure confirmed working.
