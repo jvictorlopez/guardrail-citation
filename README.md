@@ -24,9 +24,15 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> **Note:** The first run will download the HuggingFace model (~90 MB). Subsequent runs use the cached model.
+### 2. Download the embedding model
 
-### 2. Run the server
+```bash
+bash setup_model.sh
+```
+
+This downloads `sentence-transformers/all-MiniLM-L6-v2` (~87 MB) into `models/` for fully local, offline inference. No API key needed.
+
+### 3. Run the server
 
 ```bash
 uvicorn app.main:app --reload
@@ -34,7 +40,7 @@ uvicorn app.main:app --reload
 
 The API is available at `http://localhost:8000`.
 
-### 3. Test it
+### 4. Test it
 
 ```bash
 # Health check

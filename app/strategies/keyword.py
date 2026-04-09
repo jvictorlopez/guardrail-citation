@@ -31,7 +31,8 @@ class KeywordStrategy(MatchStrategy):
     """Matches candidates by lexical token overlap with the query."""
 
     def match(self, request: GuardrailRequest) -> MatchResult:
-        query_tokens = tokenize(request.query) | tokenize(request.llm_answer)
+        # Use query tokens as primary signal; llm_answer tokens add noise
+        query_tokens = tokenize(request.query)
         candidates = request.candidate_links
 
         if not candidates:

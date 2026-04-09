@@ -1,0 +1,77 @@
+Loaded 11 test cases from golden_set.json
+Targeting server at http://localhost:8000
+
+================================================================================
+CITATION GUARDRAIL — EVAL RESULTS
+================================================================================
+
+  [PASS] seed_01_grounded_inject
+         expected: status=injected, label=Member Portal
+         actual:   status=injected, label=Member Portal
+         strategy: semantic, score=0.4874
+         reason:   kb_grounded=true, no citation present, semantic match above threshold (0.487 >= 0.35)
+
+  [PASS] seed_02_grounded_already_present
+         expected: status=already_present, label=Member Portal
+         actual:   status=already_present, label=Member Portal
+         strategy: semantic, score=0.6827
+         reason:   kb_grounded=true, citation URL already present in llm_answer (R3)
+
+  [PASS] seed_03_chitchat_skip
+         expected: status=skipped_chitchat, label=None
+         actual:   status=skipped_chitchat, label=None
+         strategy: none, score=None
+         reason:   is_chitchat=true, citation never injected on chitchat (R1)
+
+  [PASS] seed_04_ungrounded_skip
+         expected: status=skipped_ungrounded, label=None
+         actual:   status=skipped_ungrounded, label=None
+         strategy: none, score=None
+         reason:   kb_grounded=false, citation never injected on ungrounded answers (R2)
+
+  [PASS] seed_05_no_match
+         expected: status=skipped_no_match, label=None
+         actual:   status=skipped_no_match, label=None
+         strategy: semantic, score=-0.0655
+         reason:   best score -0.066 below threshold 0.35
+
+  [PASS] edge_06_ambiguous_keyword
+         expected: status=injected, label=Account Settings
+         actual:   status=injected, label=Account Settings
+         strategy: semantic, score=0.5646
+         reason:   kb_grounded=true, no citation present, semantic match above threshold (0.565 >= 0.35)
+
+  [PASS] edge_07_empty_candidates
+         expected: status=skipped_no_match, label=None
+         actual:   status=skipped_no_match, label=None
+         strategy: none, score=None
+         reason:   candidate_links is empty, no citation to match
+
+  [PASS] edge_08_below_threshold
+         expected: status=skipped_no_match, label=None
+         actual:   status=skipped_no_match, label=None
+         strategy: semantic, score=0.0536
+         reason:   best score 0.054 below threshold 0.35
+
+  [PASS] edge_09_similar_scores
+         expected: status=skipped_no_match, label=None
+         actual:   status=skipped_no_match, label=None
+         strategy: semantic, score=0.6547
+         reason:   ambiguous: top-2 within margin (0.655 vs 0.607)
+
+  [PASS] edge_10_url_plain_text
+         expected: status=already_present, label=Member Portal
+         actual:   status=already_present, label=Member Portal
+         strategy: semantic, score=0.7077
+         reason:   kb_grounded=true, citation URL already present in llm_answer (R3)
+
+  [PASS] edge_11_chitchat_overrides_grounded
+         expected: status=skipped_chitchat, label=None
+         actual:   status=skipped_chitchat, label=None
+         strategy: none, score=None
+         reason:   is_chitchat=true, citation never injected on chitchat (R1)
+
+--------------------------------------------------------------------------------
+  TOTAL: 11/11 passed
+  correct_decision_rate: 100.00%
+--------------------------------------------------------------------------------
