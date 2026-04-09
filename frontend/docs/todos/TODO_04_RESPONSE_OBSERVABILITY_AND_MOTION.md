@@ -101,5 +101,5 @@ skipped_no_match:  Gray glow, x-circle icon, "No Match Found"
 `feat: add response, observability, and motion polish`
 
 ## Final Status
-- **Status**: Not started
-- **Completion Notes**: —
+- **Status**: Done
+- **Completion Notes**: FinalAnswerCard, CitationDecisionCard with status-specific glows, MetricsTiles (latency + LLM calls), HealthCountersPanel with refresh. Framer Motion staggered reveals, AnimatePresence transitions. Premium empty/loading/error states.

@@ -168,9 +168,22 @@ app/
 | R4 | Grounded + valid match | Inject at end | `injected` |
 | R5 | No match above threshold | Don't invent | `skipped_no_match` |
 
-## Frontend (Optional Demo UI)
+## Premium Frontend Console
 
-A lightweight React console for demoing the guardrail engine interactively.
+A world-class demo surface for the Citation Guardrail Engine — built as a premium AI console with luxurious dark theme, smooth animations, and intuitive two-column layout.
+
+### Frontend Stack
+
+| Component | Technology |
+|-----------|-----------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript (strict) |
+| Styling | Tailwind CSS v4 |
+| Components | shadcn/ui v4 |
+| Animations | Framer Motion |
+| Icons | Lucide React |
+| JSON Editor | Monaco Editor |
+| Toasts | Sonner |
 
 ### Setup
 
@@ -179,35 +192,55 @@ cd frontend
 npm install
 ```
 
+### Environment Variables
+
+Copy the example and adjust if needed:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | Backend API base URL |
+
 ### Run (backend must be running first)
 
 ```bash
 # Terminal 1 — backend
+cd guardrail-citation
+source .venv/bin/activate
 uvicorn app.main:app --reload
 
 # Terminal 2 — frontend
-cd frontend
+cd guardrail-citation/frontend
 npm run dev
 ```
 
-Open `http://localhost:5173`. The frontend connects to the backend at `http://localhost:8000` by default.
+Open `http://localhost:3000`. The frontend connects to the backend at `http://localhost:8000` by default.
 
-To change the backend URL, create `frontend/.env`:
+### Demo Flow (Recommended Video Sequence)
 
-```
-VITE_API_URL=http://localhost:8000
-```
+1. **First impression** — show the empty console with premium dark theme
+2. **Grounded Inject** — click the case, then Run Guardrail; show citation appended to answer with green status glow
+3. **Already Present** — show detection of existing citation with blue status
+4. **Chitchat Skip** — demonstrate rule R1 with purple status
+5. **Ungrounded Skip** — demonstrate rule R2 with amber status
+6. **No Match** — show threshold behavior with gray status
+7. **Health Counters** — click Refresh to show accumulated decision counts
+8. **Manual editing** — edit payload in Monaco editor, show JSON validation
+9. **Custom payload** — modify a case and re-run to show real-time processing
 
-### Demo Flow
+### Features
 
-1. Click a **demo case** on the left to load a pre-built payload
-2. Click **Run Guardrail** to submit
-3. View the **final answer**, **citation decision**, and **metrics** on the right
-4. Check the **Health Counters** panel — they update after each request
-
-### Stack
-
-Vite + React 18 + TypeScript. No component library, no state management, no routing — just fetch calls and clean CSS.
+- **Demo Cases Panel** — 6 pre-built cases grouped by behavior (Inject, Detect Existing, Skip Rules, Edge Cases)
+- **Monaco Editor** — syntax highlighting, JSON validation, format/reset controls
+- **Response Panel** — final answer card, citation decision with status-specific glows, metrics tiles
+- **Health Counters** — live counters from /health with manual refresh
+- **Animations** — Framer Motion staggered reveals, AnimatePresence transitions
+- **Keyboard shortcut** — Cmd+Enter to run guardrail
+- **Connectivity indicator** — real-time backend connection status
+- **Toast notifications** — success/error feedback via Sonner
 
 ## Video Walkthrough
 

@@ -104,5 +104,5 @@ Group: Edge Cases
 `feat: add demo cases and request playground experience`
 
 ## Final Status
-- **Status**: Not started
-- **Completion Notes**: —
+- **Status**: Done
+- **Completion Notes**: DemoCasesPanel with 4 groups, Monaco editor with lazy loading, JSON validation, Format/Reset/Load controls, Run Guardrail CTA with Cmd+Enter, Sonner toast feedback. All 6 cases load and submit correctly.

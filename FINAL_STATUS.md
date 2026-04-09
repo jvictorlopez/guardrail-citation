@@ -61,16 +61,25 @@ A lightweight Citation Guardrail Engine — an HTTP service that decides whether
 - sentence-transformers/all-MiniLM-L6-v2 (local, 87 MB)
 - httpx (for optional OpenAI provider)
 
-## Frontend (Demo UI)
+## Premium Frontend Console
 
-An optional Vite + React + TypeScript console for demoing the guardrail engine interactively.
+A world-class demo surface rebuilt from scratch with Next.js 16 + TypeScript + Tailwind v4 + shadcn/ui v4.
+
+### Stack
+- Next.js 16 (App Router), TypeScript (strict)
+- Tailwind CSS v4, shadcn/ui v4
+- Framer Motion, Lucide React, Monaco Editor, Sonner
 
 ### Features
-- **Payload Playground** — JSON editor with syntax validation
-- **Demo Cases** — 6 one-click test cases covering all decision statuses
-- **Response Viewer** — final answer, citation decision, metrics display
-- **Health Panel** — live counters with refresh
-- **Status Badges** — color-coded decision statuses
+- **Premium dark theme** — layered surfaces, soft glows, subtle depth
+- **Demo Cases Panel** — 6 cases grouped by behavior with status badges
+- **Monaco Editor** — syntax highlighting, JSON validation, format/reset/load
+- **Response Panel** — final answer, citation decision with status-specific glows, metrics tiles
+- **Health Counters** — live counters from /health with manual refresh
+- **Framer Motion animations** — staggered reveals, AnimatePresence transitions
+- **Keyboard shortcut** — Cmd+Enter to run guardrail
+- **Connectivity indicator** — real-time backend connection status
+- **Toast notifications** — Sonner feedback on success/error
 
 ### How to Run
 ```bash
@@ -81,13 +90,15 @@ uvicorn app.main:app --reload
 cd frontend && npm install && npm run dev
 ```
 
-Open http://localhost:5173
+Open http://localhost:3000
 
 ### Validated
-- CORS preflight returns correct headers
-- Frontend fetches /health on load
-- Demo cases submit to /guardrail and display results
-- Backend eval still passes 11/11 with frontend CORS middleware
+- CORS allows localhost:3000 and localhost:5173
+- All 6 demo cases return correct status through the UI
+- Health counters increment and refresh correctly
+- Eval still passes 11/11 at 100% accuracy
+- TypeScript build succeeds with zero errors
+- Frontend build succeeds (Next.js production build)
 
 ## Remaining
 - Video walkthrough (to be recorded separately)
