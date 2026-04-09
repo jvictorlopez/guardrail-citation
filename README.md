@@ -168,6 +168,47 @@ app/
 | R4 | Grounded + valid match | Inject at end | `injected` |
 | R5 | No match above threshold | Don't invent | `skipped_no_match` |
 
+## Frontend (Optional Demo UI)
+
+A lightweight React console for demoing the guardrail engine interactively.
+
+### Setup
+
+```bash
+cd frontend
+npm install
+```
+
+### Run (backend must be running first)
+
+```bash
+# Terminal 1 — backend
+uvicorn app.main:app --reload
+
+# Terminal 2 — frontend
+cd frontend
+npm run dev
+```
+
+Open `http://localhost:5173`. The frontend connects to the backend at `http://localhost:8000` by default.
+
+To change the backend URL, create `frontend/.env`:
+
+```
+VITE_API_URL=http://localhost:8000
+```
+
+### Demo Flow
+
+1. Click a **demo case** on the left to load a pre-built payload
+2. Click **Run Guardrail** to submit
+3. View the **final answer**, **citation decision**, and **metrics** on the right
+4. Check the **Health Counters** panel — they update after each request
+
+### Stack
+
+Vite + React 18 + TypeScript. No component library, no state management, no routing — just fetch calls and clean CSS.
+
 ## Video Walkthrough
 
 > **[Video link placeholder]** — To be added after recording.

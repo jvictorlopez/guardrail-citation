@@ -37,5 +37,5 @@ The final push must be a working, reviewable state. The README must accurately d
 `chore: validate end-to-end frontend flow and finalize docs`
 
 ## Final Status
-- **Status:** Not started
-- **Completion Notes:** —
+- **Status:** Done
+- **Completion Notes:** Backend + frontend running together. CORS verified. Health endpoint works. Eval still 11/11. README updated with frontend section. Pushed to origin/main.

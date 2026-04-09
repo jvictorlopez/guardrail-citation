@@ -41,5 +41,5 @@ If the frontend can't call the backend, nothing else works. This step establishe
 `feat: scaffold frontend app shell and backend integration`
 
 ## Final Status
-- **Status:** Not started
-- **Completion Notes:** —
+- **Status:** Done
+- **Completion Notes:** Vite+React+TS app shell created. CORS added to FastAPI. API client and types implemented. Frontend connects to backend.

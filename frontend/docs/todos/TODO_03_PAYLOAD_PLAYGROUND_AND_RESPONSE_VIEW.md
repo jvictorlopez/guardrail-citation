@@ -33,5 +33,5 @@ This is the main demo surface. The reviewer will see cases loaded, submitted, an
 `feat: add payload playground and response view`
 
 ## Final Status
-- **Status:** Not started
-- **Completion Notes:** —
+- **Status:** Done
+- **Completion Notes:** PayloadEditor with JSON validation, DemoCases with 6 one-click cases, ResponsePanel with full decision display, StatusBadge with color-coded statuses.
