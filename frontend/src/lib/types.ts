@@ -1,3 +1,5 @@
+// ── Backend API types (mirrors app/models.py) ──
+
 export interface Grounding {
   is_grounded: boolean;
   kb_grounded: boolean;
@@ -19,7 +21,7 @@ export interface GuardrailRequest {
 }
 
 export interface CitationDecision {
-  status: string;
+  status: CitationStatus;
   matched_label: string | null;
   strategy_used: string;
   similarity_score: number | null;
@@ -42,9 +44,41 @@ export interface HealthResponse {
   counters: Record<string, number>;
 }
 
+// ── Status types ──
+
+export type CitationStatus =
+  | "injected"
+  | "already_present"
+  | "skipped_chitchat"
+  | "skipped_ungrounded"
+  | "skipped_no_match";
+
+// ── Demo case types ──
+
 export interface DemoCase {
   id: string;
+  name: string;
+  group: DemoCaseGroup;
   input: GuardrailRequest;
-  expected: { status: string; matched_label: string | null };
-  _note?: string;
+  expected: {
+    status: CitationStatus;
+    matched_label: string | null;
+  };
+}
+
+export type DemoCaseGroup =
+  | "Inject"
+  | "Detect Existing"
+  | "Skip Rules"
+  | "Edge Cases";
+
+// ── Status metadata ──
+
+export interface StatusMeta {
+  label: string;
+  color: string;
+  bgColor: string;
+  borderColor: string;
+  glowColor: string;
+  icon: string;
 }
