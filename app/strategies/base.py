@@ -1,7 +1,7 @@
 """Base classes for matching strategies."""
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from app.models import CandidateLink, GuardrailRequest
 
@@ -16,6 +16,12 @@ class MatchResult:
     strategy_used: str = "none"
     llm_calls: int = 0
     reason: str = ""
+
+    # Hybrid score breakdown (populated by HybridStrategy)
+    semantic_score: float | None = None
+    bm25_score: float | None = None
+    hybrid_score: float | None = None
+    alpha: float | None = None
 
 
 class MatchStrategy(ABC):
