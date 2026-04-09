@@ -181,9 +181,11 @@ app/
 ├── config.py          # Settings via env vars
 ├── state.py           # In-memory health counters
 ├── strategies/
-│   ├── base.py        # Strategy ABC + MatchResult
-│   ├── keyword.py     # Lexical token overlap
-│   └── semantic.py    # Embedding cosine similarity
+│   ├── base.py        # Strategy ABC + MatchResult dataclass
+│   ├── keyword.py     # Lexical token overlap (fallback)
+│   ├── semantic.py    # Embedding cosine similarity
+│   ├── bm25.py        # BM25 lexical scoring (in-process)
+│   └── hybrid.py      # Semantic + BM25 score fusion
 └── providers/
     ├── base.py        # EmbeddingProvider ABC
     ├── hf.py          # HuggingFace sentence-transformers (local)
