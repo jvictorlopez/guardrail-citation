@@ -280,7 +280,7 @@ Open `http://localhost:3000`. The frontend connects to the backend at `http://lo
 
 ## Video Walkthrough
 
-> **[Video link placeholder]** — To be added after recording.
+> **[[Video link(https://youtu.be/Tcinh-BH2Jc)]** — To be added after recording.
 
 ## License
 
