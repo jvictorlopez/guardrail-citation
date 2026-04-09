@@ -13,6 +13,8 @@ import {
   Tag,
   Search,
   MessageSquareText,
+  Server,
+  Blend,
 } from "lucide-react";
 import {
   Card,
@@ -128,6 +130,7 @@ function ErrorState({ error }: { error: string }) {
 function ResponseContent({ response }: { response: GuardrailResponse }) {
   const { final_answer, citation_decision, metrics } = response;
   const statusCfg = getStatusConfig(citation_decision.status);
+  const scoreBreakdown = citation_decision.score_breakdown;
 
   const glowClass =
     citation_decision.status === "injected"
@@ -139,6 +142,8 @@ function ResponseContent({ response }: { response: GuardrailResponse }) {
           : citation_decision.status === "skipped_ungrounded"
             ? "glow-amber"
             : "glow-zinc";
+
+  const modelCalls = metrics.model_calls ?? metrics.llm_calls ?? 0;
 
   return (
     <motion.div
@@ -209,7 +214,37 @@ function ResponseContent({ response }: { response: GuardrailResponse }) {
                   : "—"
               }
             />
+            {citation_decision.provider_used && (
+              <DetailItem
+                icon={<Server className="w-3 h-3" />}
+                label="Provider"
+                value={citation_decision.provider_used}
+              />
+            )}
           </div>
+
+          {/* Score Breakdown for hybrid */}
+          {scoreBreakdown && scoreBreakdown.hybrid_score !== null && (
+            <div className="grid grid-cols-4 gap-1.5 pt-2 border-t border-border/30">
+              <MiniStat
+                label="Semantic"
+                value={scoreBreakdown.semantic_score?.toFixed(4) ?? "—"}
+              />
+              <MiniStat
+                label="BM25"
+                value={scoreBreakdown.bm25_score?.toFixed(4) ?? "—"}
+              />
+              <MiniStat
+                label="Hybrid"
+                value={scoreBreakdown.hybrid_score?.toFixed(4) ?? "—"}
+                highlight
+              />
+              <MiniStat
+                label="Alpha"
+                value={scoreBreakdown.alpha?.toFixed(2) ?? "—"}
+              />
+            </div>
+          )}
 
           {/* Reason */}
           <div className="flex items-start gap-1.5 pt-2 border-t border-border/30">
@@ -237,8 +272,8 @@ function ResponseContent({ response }: { response: GuardrailResponse }) {
           />
           <MetricTile
             icon={<Cpu className="w-4 h-4" />}
-            label="LLM Calls"
-            value={String(metrics.llm_calls)}
+            label="Model Calls"
+            value={String(modelCalls)}
           />
         </div>
       </motion.div>
@@ -266,6 +301,32 @@ function DetailItem({
           {value}
         </span>
       </div>
+    </div>
+  );
+}
+
+function MiniStat({
+  label,
+  value,
+  highlight,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div className="flex flex-col items-center rounded-md bg-background/20 px-1.5 py-1.5">
+      <span className="text-[9px] text-muted-foreground/40 uppercase tracking-wider leading-none">
+        {label}
+      </span>
+      <span
+        className={cn(
+          "text-[11px] font-mono font-semibold mt-0.5 tabular-nums",
+          highlight ? "text-primary" : "text-foreground/70"
+        )}
+      >
+        {value}
+      </span>
     </div>
   );
 }

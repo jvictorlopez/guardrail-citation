@@ -79,7 +79,7 @@ export function PayloadEditor({
   }, [handleKeyDown]);
 
   return (
-    <Card className="flex-1 flex flex-col min-h-0 overflow-hidden">
+    <Card className="shrink-0 flex flex-col overflow-hidden">
       <CardHeader className="pb-2 shrink-0">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground font-semibold">
@@ -115,16 +115,16 @@ export function PayloadEditor({
         </div>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col min-h-0 gap-3">
+      <CardContent className="flex flex-col gap-3">
         {/* Monaco Editor */}
         <div
           className={cn(
-            "flex-1 min-h-0 rounded-lg overflow-hidden border",
+            "rounded-lg overflow-hidden border",
             jsonError ? "border-red-500/30" : "border-border/50"
           )}
         >
           <MonacoEditor
-            height="100%"
+            height="260px"
             language="json"
             theme="vs-dark"
             value={value}

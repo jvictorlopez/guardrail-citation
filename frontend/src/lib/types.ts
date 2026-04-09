@@ -18,6 +18,18 @@ export interface GuardrailRequest {
   grounding: Grounding;
   is_chitchat: boolean;
   candidate_links: CandidateLink[];
+
+  // Per-request overrides
+  strategy?: "semantic" | "hybrid";
+  provider?: "hf" | "openai";
+  alpha?: number;
+}
+
+export interface ScoreBreakdown {
+  semantic_score: number | null;
+  bm25_score: number | null;
+  hybrid_score: number | null;
+  alpha: number | null;
 }
 
 export interface CitationDecision {
@@ -26,11 +38,14 @@ export interface CitationDecision {
   strategy_used: string;
   similarity_score: number | null;
   reason: string;
+  provider_used?: string | null;
+  score_breakdown?: ScoreBreakdown | null;
 }
 
 export interface Metrics {
   latency_ms: number;
   llm_calls: number;
+  model_calls: number;
 }
 
 export interface GuardrailResponse {
@@ -71,6 +86,17 @@ export type DemoCaseGroup =
   | "Detect Existing"
   | "Skip Rules"
   | "Edge Cases";
+
+// ── Search config ──
+
+export type SearchStrategy = "semantic" | "hybrid";
+export type EmbeddingProvider = "hf" | "openai";
+
+export interface SearchConfig {
+  strategy: SearchStrategy;
+  provider: EmbeddingProvider;
+  alpha: number;
+}
 
 // ── Status metadata ──
 

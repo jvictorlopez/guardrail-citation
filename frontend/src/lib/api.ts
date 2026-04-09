@@ -1,14 +1,24 @@
-import type { GuardrailRequest, GuardrailResponse, HealthResponse } from "./types";
+import type { GuardrailRequest, GuardrailResponse, HealthResponse, SearchConfig } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export async function postGuardrail(
-  request: GuardrailRequest
+  request: GuardrailRequest,
+  searchConfig?: SearchConfig
 ): Promise<GuardrailResponse> {
+  const body = {
+    ...request,
+    ...(searchConfig && {
+      strategy: searchConfig.strategy,
+      provider: searchConfig.provider,
+      alpha: searchConfig.strategy === "hybrid" ? searchConfig.alpha : undefined,
+    }),
+  };
+
   const res = await fetch(`${API_URL}/guardrail`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(request),
+    body: JSON.stringify(body),
   });
   if (!res.ok) {
     const text = await res.text().catch(() => "Unknown error");

@@ -4,12 +4,13 @@ import { useState, useCallback, useEffect } from "react";
 import { toast } from "sonner";
 import { TopBar } from "@/components/top-bar";
 import { DemoCasesPanel } from "@/components/demo-cases-panel";
+import { SearchControls } from "@/components/search-controls";
 import { PayloadEditor } from "@/components/payload-editor";
 import { ResponsePanel } from "@/components/response-panel";
 import { HealthCountersPanel } from "@/components/health-counters-panel";
 import { postGuardrail, checkConnectivity } from "@/lib/api";
 import { demoCases } from "@/lib/demo-cases";
-import type { GuardrailResponse, DemoCase } from "@/lib/types";
+import type { GuardrailResponse, DemoCase, SearchConfig } from "@/lib/types";
 
 export default function Home() {
   const [activeCase, setActiveCase] = useState<DemoCase | null>(null);
@@ -19,6 +20,11 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [connected, setConnected] = useState<boolean | null>(null);
   const [healthRefreshKey, setHealthRefreshKey] = useState(0);
+  const [searchConfig, setSearchConfig] = useState<SearchConfig>({
+    strategy: "semantic",
+    provider: "hf",
+    alpha: 0.7,
+  });
 
   // Check backend connectivity on mount
   useEffect(() => {
@@ -54,7 +60,7 @@ export default function Home() {
     setError(null);
 
     try {
-      const result = await postGuardrail(parsed);
+      const result = await postGuardrail(parsed, searchConfig);
       setResponse(result);
       setHealthRefreshKey((k) => k + 1);
       toast.success("Guardrail processed", {
@@ -67,7 +73,7 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  }, [payload]);
+  }, [payload, searchConfig]);
 
   const handleFormat = useCallback(() => {
     try {
@@ -99,11 +105,15 @@ export default function Home() {
       <TopBar connected={connected} />
 
       <main className="flex-1 flex gap-4 p-4 pt-0 overflow-hidden">
-        {/* Left Column — Demo Cases + Playground */}
-        <div className="flex flex-col gap-4 w-[440px] min-w-[400px] overflow-hidden">
+        {/* Left Column — Demo Cases + Search Config + Playground */}
+        <div className="flex flex-col gap-3 w-[440px] min-w-[400px] overflow-y-auto overflow-x-hidden pr-1">
           <DemoCasesPanel
             activeCase={activeCase}
             onSelectCase={handleSelectCase}
+          />
+          <SearchControls
+            config={searchConfig}
+            onChange={setSearchConfig}
           />
           <PayloadEditor
             value={payload}
